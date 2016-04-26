@@ -1,7 +1,10 @@
 README:
 How to run: 
-prerunScript
-sim(plant)
+- prerunScript
+- sim(plant)
+
+Important Notes:
+- Neural Activation u ranges strictly from 0 to 1.
 
 See also:
  - postrunDiagnostics

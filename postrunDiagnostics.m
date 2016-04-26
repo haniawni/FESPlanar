@@ -189,3 +189,39 @@ title('FV,FL vs t')
 legend('FL(BRD)','FV(BRD)','FL(TRIlong)','FV(TRIlong)','location','best')
 xlabel('time (sec)')
 ylabel('scaling factor')
+%% TestPec2
+% setPTPEC2
+% sim('plant')
+figure
+subplot(2,2,1)
+hold on
+plot(tout,u(:,38),'k')
+legend('PECM2','location','best')
+xlabel('Time (sec)')
+ylabel('Activation Level')
+title('Input Activations')
+subplot(2,2,3)
+hold on
+plot(tout,x(:,1))
+plot(tout,x(:,2))
+legend('Shoulder','Elbow','location','best')
+xlabel('Time (sec)')
+ylabel('Angle (deg)')
+title('Joint Movement')
+subplot(2,2,2)
+hold on
+plot(tout,tauM(:,1))
+plot(tout,squeeze(tauM(:,2)))
+legend('Shoulder','Elbow','location','best')
+xlabel('Time (sec)')
+ylabel('Torque (N*m)')
+title('Joint Torque')
+%% Test Calcium Dynamics:
+figure
+plot(tout,u(:,1))
+hold on
+plot(tout,a(:,1))
+legend('u','a','location','best')
+xlabel('Time (sec)')
+ylabel('Amplitude')
+title('u vs a on Anc')
