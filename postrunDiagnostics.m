@@ -72,13 +72,15 @@ end
 % load data
 flenElevAngl
 flenElboFlex
+newflenEA
 figure
 % Shoulder - Smooth
 subplot(2,2,1)
 hold on
 plot(x(:,1),lambda(:,38))
 plot(fiberLenElevAngle(:,2),fiberLenElevAngle(:,40))
-legend('Simulink', 'OpenSim')
+%plot(newFLenElevAngl(:,2),newFLenElevAngl(:,40))
+legend('Simulink', 'OpenSim','OpenSim new')
 title('Fiber Length PEC2')
 xlabel('qs (deg)')
 ylabel('fLen (m)')
@@ -88,7 +90,8 @@ subplot(2,2,2)
 hold on
 plot(x(:,1),lambda(:,35))
 plot(fiberLenElevAngle(:,2),fiberLenElevAngle(:,37))
-legend('Simulink', 'OpenSim')
+%plot(newFLenElevAngl(:,2),newFLenElevAngl(:,37))
+legend('Simulink', 'OpenSim old', 'OpenSim new')
 title('Fiber Length LAT2')
 xlabel('qs (deg)')
 ylabel('fLen (m)')
@@ -97,10 +100,23 @@ subplot(2,2,3)
 hold on
 plot(x(:,2),lambda(:,6))
 plot(fiberLenElboFlex(:,2),fiberLenElboFlex(:,8))
-legend('Simulink', 'OpenSim')
+legend('Simulink', 'OpenSim old', 'OpenSim new')
 title('Fiber Length BRD')
 xlabel('qe (deg)')
 ylabel('fLen (m)')
+%% Check Muscle Lengths One Figure
+figure
+hold on
+plot(x(:,1),lambda(:,38),'b')
+plot(fiberLenElevAngle(:,2),fiberLenElevAngle(:,40),'b:')
+plot(x(:,1),lambda(:,35),'r')
+plot(fiberLenElevAngle(:,2),fiberLenElevAngle(:,37),'r:')
+plot(x(:,2),lambda(:,6),'k')
+plot(fiberLenElboFlex(:,2),fiberLenElboFlex(:,8),'k:')
+legend('PECM2 Simulink','PECM2 OpenSim','LAT2 Simulink','LAT2 OpenSim','BRD Simulink','BRD OpenSim','location','best')
+title('Fiber Length vs Angle for Multiple Muscles')
+xlabel('Relevant Angle (deg)')
+ylabel('Fiber Length (m)')
 %% Check Jmu
 figure
 hold on
@@ -189,33 +205,6 @@ title('FV,FL vs t')
 legend('FL(BRD)','FV(BRD)','FL(TRIlong)','FV(TRIlong)','location','best')
 xlabel('time (sec)')
 ylabel('scaling factor')
-%% TestPec2
-% setPTPEC2
-% sim('plant')
-figure
-subplot(2,2,1)
-hold on
-plot(tout,u(:,38),'k')
-legend('PECM2','location','best')
-xlabel('Time (sec)')
-ylabel('Activation Level')
-title('Input Activations')
-subplot(2,2,3)
-hold on
-plot(tout,x(:,1))
-plot(tout,x(:,2))
-legend('Shoulder','Elbow','location','best')
-xlabel('Time (sec)')
-ylabel('Angle (deg)')
-title('Joint Movement')
-subplot(2,2,2)
-hold on
-plot(tout,tauM(:,1))
-plot(tout,squeeze(tauM(:,2)))
-legend('Shoulder','Elbow','location','best')
-xlabel('Time (sec)')
-ylabel('Torque (N*m)')
-title('Joint Torque')
 %% Test Calcium Dynamics:
 figure
 plot(tout,u(:,1))
